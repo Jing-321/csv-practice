@@ -122,13 +122,17 @@ describe "CSV and Enumerables Exercise" do
   end
 
   describe 'team_with_most_medals' do
-    data = get_all_olympic_athletes(OLYMPIC_DATA_FILENAME)
-    team_total_medals = total_medals_per_team(data)
-    team_winner = team_with_most_medals(team_total_medals)
+    it 'most medal' do
+      data = get_all_olympic_athletes(OLYMPIC_DATA_FILENAME)
+      team_total_medals = total_medals_per_team(data)
+      team_winner = team_with_most_medals(team_total_medals)
 
-    team_winner["Team"].must_be_instance_of String
-    team_winner["Count"].must_be_instance_of Integer
-
+      expect(team_winner).must_be_instance_of Hash
+      expect(team_winner["Team"]).must_equal "United States"
+      expect(team_winner["Count"]).must_be_instance_of Integer
+    end
   end
+
+
 
 end
