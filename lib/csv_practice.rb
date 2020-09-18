@@ -4,10 +4,8 @@ require 'awesome_print'
 ##############################################
 def get_all_olympic_athletes(filename)
   athletes_all = CSV.read("#{filename}", headers: true).map {| athlete | athlete.to_h}
-  athletes = []
-  athletes_all.each do |athlete|
-    athletes << athlete
-  end
+  exclude_details = %W[Sex Age Weight NOC Games Season]
+  athletes = athletes_all.each {|athlete| athlete.reject! {|k, v| exclude_details.include? k} }
 
   return athletes
 
@@ -38,6 +36,3 @@ def team_with_most_medals(teams)
 end
 
 ##############################################
-# ath = get_all_olympic_athletes('../data/athlete_events.csv')
-# most = team_with_most_medals(total_medals_per_team(ath))
-# ap most
