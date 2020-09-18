@@ -92,7 +92,7 @@ describe "CSV and Enumerables Exercise" do
     end
   end
 
-  xdescribe 'get_all_gold_medalists' do
+  describe 'get_all_gold_medalists' do
     
     it 'returns an array of gold medalists' do
       # Arrange
@@ -119,6 +119,16 @@ describe "CSV and Enumerables Exercise" do
       # Assert
       expect(all_gold_medalists.length).must_equal 2344
     end
+  end
+
+  describe 'team_with_most_medals' do
+    data = get_all_olympic_athletes(OLYMPIC_DATA_FILENAME)
+    team_total_medals = total_medals_per_team(data)
+    team_winner = team_with_most_medals(team_total_medals)
+
+    team_winner["Team"].must_be_instance_of String
+    team_winner["Count"].must_be_instance_of Integer
+
   end
 
 end
